@@ -80,6 +80,13 @@ const educationItems = [
     detail: "Validated certification in Swift programming and native application development fundamentals.",
     href: "assets/certs/swift-certificate.pdf",
     hrefLabel: "View Swift Certificate"
+  },
+  {
+    title: "Front End Development Certification",
+    issuer: "Certificate File",
+    detail: "Validated certification in front-end development principles, responsive interfaces, and modern web UI implementation.",
+    href: "assets/certs/frontend-development-certificate.pdf",
+    hrefLabel: "View Front End Development Certificate"
   }
 ];
 
