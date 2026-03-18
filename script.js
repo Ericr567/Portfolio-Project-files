@@ -12,7 +12,7 @@ const projects = [
     summary:
       "Retro-inspired Pokédex built with React and Vite, featuring Pokémon search, sortable listings, favorites persistence, dark mode, shareable URL state, and API-backed detail caching.",
     tags: ["React", "Vite", "JavaScript", "API"],
-    image: "https://opengraph.githubassets.com/1/Ericr567/PokeDex-project-folder",
+    image: "assets/images/pokedex-thumb.svg",
     imageAlt: "Pokédex project repository preview image",
     href: "https://github.com/Ericr567/PokeDex-project-folder",
     hrefLabel: "View GitHub Repo"
@@ -21,7 +21,7 @@ const projects = [
     title: "NorthLine Club",
     summary: "Membership community sign-up page with a glassmorphism split-card layout, animated form, responsive design, and polished onboarding UI built in vanilla HTML and CSS.",
     tags: ["HTML", "CSS", "UI Design"],
-    image: "https://opengraph.githubassets.com/1/Ericr567/NorthLineProject",
+    image: "assets/images/northline-project.png",
     imageAlt: "NorthLine Club repository preview image",
     href: "https://github.com/Ericr567/NorthLineProject",
     hrefLabel: "View GitHub Repo"
@@ -31,8 +31,8 @@ const projects = [
     summary:
       "TypeScript-based dashboard project focused on back-of-house workflow visibility, with a clean interface for operational tracking and day-to-day management.",
     tags: ["TypeScript", "Dashboard", "UI Design"],
-    image: "https://opengraph.githubassets.com/1/Ericr567/Boh-dashboard",
-    imageAlt: "BOH Dashboard repository preview image",
+    image: "assets/images/boh-dashboard-project.jpg",
+    imageAlt: "BOH Dashboard app screenshot",
     href: "https://github.com/Ericr567/Boh-dashboard",
     hrefLabel: "View GitHub Repo"
   }

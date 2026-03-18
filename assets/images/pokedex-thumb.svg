@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Pokedex Web App thumbnail</title>
+  <desc id="desc">Retro-inspired red and dark interface with Pokemon cards and search bar.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#121522"/>
+      <stop offset="100%" stop-color="#1e2337"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#ef5350"/>
+      <stop offset="100%" stop-color="#d32f2f"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="40" y="38" width="1120" height="554" rx="28" fill="#0e1220" stroke="#2a314a"/>
+
+  <rect x="40" y="38" width="1120" height="110" rx="28" fill="url(#header)"/>
+  <rect x="40" y="118" width="1120" height="30" fill="url(#header)"/>
+
+  <circle cx="102" cy="92" r="24" fill="#9fd8ff" stroke="#dff2ff" stroke-width="5"/>
+  <circle cx="161" cy="92" r="11" fill="#ffe082"/>
+  <circle cx="190" cy="92" r="11" fill="#81c784"/>
+  <circle cx="219" cy="92" r="11" fill="#ef9a9a"/>
+
+  <text x="282" y="102" font-family="'Trebuchet MS', 'Segoe UI', sans-serif" font-size="42" font-weight="700" fill="#ffffff">POKEDEX</text>
+
+  <rect x="80" y="184" width="1040" height="54" rx="14" fill="#1f2740" stroke="#37466f"/>
+  <circle cx="112" cy="211" r="10" fill="#7aa2ff"/>
+  <rect x="132" y="201" width="255" height="20" rx="10" fill="#2f3f68"/>
+
+  <g transform="translate(80,270)">
+    <rect width="300" height="250" rx="18" fill="#1a2136" stroke="#32426a"/>
+    <rect x="18" y="18" width="264" height="142" rx="14" fill="#26345a"/>
+    <circle cx="150" cy="90" r="42" fill="#ffcb05"/>
+    <circle cx="150" cy="90" r="18" fill="#3b4cca"/>
+    <rect x="18" y="178" width="120" height="18" rx="9" fill="#3b4cca"/>
+    <rect x="18" y="206" width="196" height="14" rx="7" fill="#38435f"/>
+  </g>
+
+  <g transform="translate(450,270)">
+    <rect width="300" height="250" rx="18" fill="#1a2136" stroke="#32426a"/>
+    <rect x="18" y="18" width="264" height="142" rx="14" fill="#2e3f6b"/>
+    <rect x="88" y="55" width="126" height="70" rx="35" fill="#89d3ff"/>
+    <rect x="18" y="178" width="110" height="18" rx="9" fill="#7ac74c"/>
+    <rect x="18" y="206" width="188" height="14" rx="7" fill="#38435f"/>
+  </g>
+
+  <g transform="translate(820,270)">
+    <rect width="300" height="250" rx="18" fill="#1a2136" stroke="#32426a"/>
+    <rect x="18" y="18" width="264" height="142" rx="14" fill="#34497a"/>
+    <polygon points="150,44 204,128 96,128" fill="#ff7043"/>
+    <rect x="18" y="178" width="132" height="18" rx="9" fill="#ffb74d"/>
+    <rect x="18" y="206" width="178" height="14" rx="7" fill="#38435f"/>
+  </g>
+</svg>
