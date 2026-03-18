@@ -4,8 +4,8 @@
   --bg: #0a0e27;
   --surface: #1a1f3a;
   --surface-strong: #2d3561;
-  --text: #e8ecf1;
-  --text-soft: #a8b2c1;
+  --text: #f7fbff;
+  --text-soft: #d2dcef;
   --accent: #00d4ff;
   --accent-alt: #6b5aff;
   --line: #2d3561;
@@ -16,8 +16,8 @@
   --bg: #0a0e27;
   --surface: #1a1f3a;
   --surface-strong: #2d3561;
-  --text: #e8ecf1;
-  --text-soft: #a8b2c1;
+  --text: #f7fbff;
+  --text-soft: #d2dcef;
   --accent: #00d4ff;
   --accent-alt: #6b5aff;
   --line: #2d3561;
@@ -321,6 +321,16 @@ h2 {
   flex-direction: column;
   min-height: 220px;
   padding: 1rem;
+}
+
+.project-thumb {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  display: block;
+  margin-bottom: 0.9rem;
+  max-height: 165px;
+  object-fit: cover;
+  width: 100%;
 }
 
 .project-card h3 {

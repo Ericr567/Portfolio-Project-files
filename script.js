@@ -12,6 +12,8 @@ const projects = [
     summary:
       "Retro-inspired Pokédex built with React and Vite, featuring Pokémon search, sortable listings, favorites persistence, dark mode, shareable URL state, and API-backed detail caching.",
     tags: ["React", "Vite", "JavaScript", "API"],
+    image: "https://opengraph.githubassets.com/1/Ericr567/PokeDex-project-folder",
+    imageAlt: "Pokédex project repository preview image",
     href: "https://github.com/Ericr567/PokeDex-project-folder",
     hrefLabel: "View GitHub Repo"
   },
@@ -19,7 +21,19 @@ const projects = [
     title: "NorthLine Club",
     summary: "Membership community sign-up page with a glassmorphism split-card layout, animated form, responsive design, and polished onboarding UI built in vanilla HTML and CSS.",
     tags: ["HTML", "CSS", "UI Design"],
+    image: "https://opengraph.githubassets.com/1/Ericr567/NorthLineProject",
+    imageAlt: "NorthLine Club repository preview image",
     href: "https://github.com/Ericr567/NorthLineProject",
+    hrefLabel: "View GitHub Repo"
+  },
+  {
+    title: "BOH Dashboard",
+    summary:
+      "TypeScript-based dashboard project focused on back-of-house workflow visibility, with a clean interface for operational tracking and day-to-day management.",
+    tags: ["TypeScript", "Dashboard", "UI Design"],
+    image: "https://opengraph.githubassets.com/1/Ericr567/Boh-dashboard",
+    imageAlt: "BOH Dashboard repository preview image",
+    href: "https://github.com/Ericr567/Boh-dashboard",
     hrefLabel: "View GitHub Repo"
   }
 ];
@@ -91,16 +105,16 @@ const educationItems = [
 ];
 
 const skills = [
-  "Professional Networking",
-  "Career Development",
-  "Communication",
-  "Collaboration",
-  "Problem Solving",
-  "Adaptability",
-  "Project Coordination",
-  "Client Communication",
-  "Technical Learning",
-  "Execution"
+  "UI Design",
+  "UX Design",
+  "HTML",
+  "CSS",
+  "JavaScript",
+  "React",
+  "TypeScript",
+  "SQL",
+  "Python",
+  "Swift"
 ];
 
 const words = ["from real profile data.", "for meaningful work.", "with professional focus."];
@@ -111,8 +125,6 @@ const educationGrid = document.getElementById("education-grid");
 const skillsCloud = document.getElementById("skills-cloud");
 const typingText = document.getElementById("typing-text");
 const counters = document.querySelectorAll(".counter");
-const themeToggle = document.getElementById("theme-toggle");
-const root = document.documentElement;
 const statusText = document.getElementById("form-status");
 const heroCopy = document.getElementById("hero-copy");
 const aboutTitle = document.getElementById("about-title");
@@ -135,6 +147,11 @@ function renderProjects(filter = "All") {
     .map(
       (project) => `
       <article class="project-card">
+        ${
+          project.image
+            ? `<img class="project-thumb" src="${project.image}" alt="${project.imageAlt || `${project.title} preview`}" loading="lazy" />`
+            : ""
+        }
         <h3>${project.title}</h3>
         <p>${project.summary}</p>
         ${
@@ -176,7 +193,7 @@ function initFilters() {
   projectFilters.innerHTML = tags
     .map(
       (tag, index) =>
-        `<button type="button" class="${index === 0 ? "active" : ""}" data-filter="${tag}">${tag}</button>`
+        `<button type="button" class="${index === 0 ? "active" : ""}" aria-pressed="${index === 0 ? "true" : "false"}" data-filter="${tag}">${tag}</button>`
     )
     .join("");
 
@@ -186,8 +203,12 @@ function initFilters() {
       return;
     }
 
-    projectFilters.querySelectorAll("button").forEach((button) => button.classList.remove("active"));
+    projectFilters.querySelectorAll("button").forEach((button) => {
+      button.classList.remove("active");
+      button.setAttribute("aria-pressed", "false");
+    });
     target.classList.add("active");
+    target.setAttribute("aria-pressed", "true");
     renderProjects(target.dataset.filter);
   });
 }
@@ -300,25 +321,6 @@ function initSectionSpy() {
   sections.forEach((section) => observer.observe(section));
 }
 
-function initTheme() {
-  const saved = localStorage.getItem("portfolio-theme");
-  if (saved) {
-    root.dataset.theme = saved;
-  }
-
-  themeToggle.addEventListener("click", () => {
-    const next = root.dataset.theme === "night" ? "day" : "night";
-    if (next === "day") {
-      delete root.dataset.theme;
-      localStorage.setItem("portfolio-theme", "day");
-      return;
-    }
-
-    root.dataset.theme = "night";
-    localStorage.setItem("portfolio-theme", "night");
-  });
-}
-
 function initContactForm() {
   const form = document.getElementById("contact-form");
 
@@ -347,6 +349,12 @@ function initYear() {
 function initNoise() {
   const canvas = document.getElementById("noise-canvas");
   const context = canvas.getContext("2d", { alpha: true });
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (reducedMotion) {
+    canvas.style.display = "none";
+    return;
+  }
 
   function draw() {
     canvas.width = window.innerWidth;
@@ -368,7 +376,9 @@ function initNoise() {
 
   draw();
   window.addEventListener("resize", draw);
-  setInterval(draw, 550);
+  const redrawInterval = window.innerWidth < 768 ? 1300 : 900;
+  const noiseTimer = setInterval(draw, redrawInterval);
+  window.addEventListener("beforeunload", () => clearInterval(noiseTimer), { once: true });
 }
 
 hydrateProfileContent();
@@ -380,7 +390,6 @@ cycleTyping();
 initCounters();
 initReveal();
 initSectionSpy();
-initTheme();
 initContactForm();
 initYear();
 initNoise();
