@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eric Rogers | Portfolio</title>
+    <meta
+      name="description"
+      content="Dynamic portfolio for Eric Rogers featuring selected projects, skills, and contact details."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <canvas id="noise-canvas" aria-hidden="true"></canvas>
+
+    <header class="site-header">
+      <a href="#top" class="logo" aria-label="Go to top">ER</a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero reveal">
+        <p class="eyebrow">LinkedIn Profile Portfolio</p>
+        <h1>
+          I build digital experiences
+          <span id="typing-text" class="typing-text"></span>
+        </h1>
+        <p id="hero-copy" class="hero-copy"></p>
+        <div class="hero-cta">
+          <a class="button primary" href="#projects">View My Work</a>
+          <a class="button ghost" href="https://www.linkedin.com/in/eric-rogers-46298b2aa" target="_blank" rel="noreferrer">View LinkedIn</a>
+        </div>
+        <ul class="stats-grid" aria-label="Quick statistics">
+          <li>
+            <strong class="counter" data-target="4">0</strong>
+            <span>Experience Highlights</span>
+          </li>
+          <li>
+            <strong class="counter" data-target="10">0</strong>
+            <span>Core Skills</span>
+          </li>
+          <li>
+            <strong class="counter" data-target="1">0</strong>
+            <span>Primary Platform</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="about" class="about section reveal">
+        <div>
+          <p class="eyebrow">About Me</p>
+          <h2 id="about-title">Professional Snapshot</h2>
+        </div>
+        <p id="about-copy"></p>
+      </section>
+
+      <section id="projects" class="projects section reveal">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Selected Work</p>
+            <h2>Projects That Move the Needle</h2>
+          </div>
+          <div id="project-filters" class="filters" role="tablist" aria-label="Project filters"></div>
+        </div>
+        <div id="project-grid" class="project-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="education" class="education section reveal">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Education & Certifications</p>
+            <h2>Verified Learning Credentials</h2>
+          </div>
+        </div>
+        <div id="education-grid" class="education-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="skills" class="skills section reveal">
+        <p class="eyebrow">Capabilities</p>
+        <h2>What I Bring to Every Build</h2>
+        <div id="skills-cloud" class="skills-cloud"></div>
+      </section>
+
+      <section id="contact" class="contact section reveal">
+        <p class="eyebrow">Contact</p>
+        <h2>Let&apos;s connect professionally.</h2>
+        <p>
+          The fastest way to reach me is via LinkedIn. You can also use the contact form below.
+        </p>
+        <p>
+          <a class="button ghost" href="https://www.linkedin.com/in/eric-rogers-46298b2aa" target="_blank" rel="noreferrer">Connect on LinkedIn</a>
+        </p>
+        <form id="contact-form" class="contact-form">
+          <label>
+            Name
+            <input type="text" name="name" placeholder="Your name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" placeholder="you@example.com" required />
+          </label>
+          <label>
+            Message
+            <textarea name="message" rows="4" placeholder="Tell me about your project" required></textarea>
+          </label>
+          <button class="button primary" type="submit">Send Message</button>
+          <p id="form-status" class="form-status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p><span id="year"></span> Eric Rogers. Built with intention.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
