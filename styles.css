@@ -155,10 +155,17 @@ h2 {
 }
 
 .typing-text {
+  display: block;
   border-right: 2px solid var(--accent);
   color: var(--accent);
-  margin-left: 0.35rem;
-  min-width: 10ch;
+  font-size: clamp(1rem, 3.2vw, 1.6rem);
+  line-height: 1.2;
+  margin-top: 0.35rem;
+  min-height: 1.2em;
+  min-width: 0;
+  width: min(22ch, 100%);
+  white-space: nowrap;
+  overflow: hidden;
   padding-right: 0.2rem;
 }
 
@@ -240,6 +247,30 @@ h2 {
 .about p {
   color: var(--text-soft);
   font-size: 1.05rem;
+}
+
+.about-story {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile-photo-wrap {
+  align-self: start;
+  background: linear-gradient(160deg, rgba(0, 212, 255, 0.22), rgba(107, 90, 255, 0.22));
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  margin: 0;
+  max-width: 320px;
+  padding: 0.35rem;
+}
+
+.profile-photo-wrap img {
+  border-radius: 14px;
+  display: block;
+  height: auto;
+  object-fit: cover;
+  width: 100%;
 }
 
 .section-header {
@@ -454,5 +485,9 @@ textarea:focus {
 
   h1 {
     max-width: 12ch;
+  }
+
+  .profile-photo-wrap {
+    max-width: 100%;
   }
 }
