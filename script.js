@@ -1,40 +1,80 @@
 const profile = {
   name: "Eric Rogers Jr.",
   linkedin: "https://www.linkedin.com/in/eric-rogers-46298b2aa",
-  headline: "Chef-turned-UI/UX Designer | 27 | Career Pivot in Progress",
+  github: "https://github.com/Ericr567",
+  email: "ericrrj98@gmail.com",
+  headline: "Junior front-end developer focused on React, JavaScript, accessible UI, and responsive design.",
   about:
-    "For five years, I've worked professionally in hospitality as a chef—developing skills in precision, problem-solving, and user-focused thinking. In 2024, I decided to pivot into UI/UX design, channeling the same creativity and attention to detail into digital experiences. This portfolio showcases the foundation of my design journey: projects built with modern tools like React and Vite, certified expertise in core web technologies, and a commitment to thoughtful, usable design. Every project here represents my transition from the kitchen to the screen."
+    "I bring a hospitality background shaped by consistency, communication, and service-first thinking into front-end development. My work centers on responsive interfaces, clean UI decisions, and practical user experience improvements built with modern web tools. I am actively looking for an opportunity where I can contribute to a team, keep learning fast, and ship polished front-end work that helps real users."
 };
 
 const projects = [
   {
+    title: "LineFlow BOH Dashboard",
+    summary:
+      "An installable TypeScript dashboard for restaurant operations that gives managers quick visibility into prep status, station workload, low-stock alerts, and shift handoff notes.",
+    tags: ["React", "TypeScript", "Dashboard", "PWA"],
+    highlights: [
+      "Built manager and staff views for service readiness, station workload, and handoff tracking",
+      "Added backup export and import workflows with resilient local data handling",
+      "Shipped a live Vercel deployment with responsive UI and production build checks"
+    ],
+    featured: true,
+    image: "assets/images/generated/boh-dashboard-live.png",
+    imageAlt: "LineFlow BOH Dashboard live app screenshot",
+    demoHref: "https://boh-dashboard.vercel.app/",
+    demoLabel: "Live Demo",
+    href: "https://github.com/Ericr567/Boh-dashboard",
+    hrefLabel: "View Code on GitHub"
+  },
+  {
     title: "Pokédex Web App",
     summary:
-      "Retro-inspired Pokédex built with React and Vite, featuring Pokémon search, sortable listings, favorites persistence, dark mode, shareable URL state, and API-backed detail caching.",
-    tags: ["React", "Vite", "JavaScript", "API"],
-    image: "assets/images/pokedex-thumb.svg",
-    imageAlt: "Pokédex project repository preview image",
+      "A feature-rich React app that turns public Pokémon API data into a polished experience with search, team building, favorites, and battle features.",
+    tags: ["React", "JavaScript", "API", "UX"],
+    highlights: [
+      "Integrated search, filters, favorites, and cached detail views from external API data",
+      "Built team builder, shiny tracking, and battle mode interactions beyond a basic list app",
+      "Improved usability with dark mode, offline handling, and sprite fallback behavior"
+    ],
+    image: "assets/images/generated/pokedex-live.png",
+    imageAlt: "Pokédex live app screenshot",
+    demoHref: "https://pokedex-projectv2.netlify.app/",
+    demoLabel: "Live Demo",
     href: "https://github.com/Ericr567/PokeDex-project-folder",
-    hrefLabel: "View GitHub Repo"
+    hrefLabel: "View Code on GitHub"
   },
   {
-    title: "NorthLine Club",
-    summary: "Membership community sign-up page with a glassmorphism split-card layout, animated form, responsive design, and polished onboarding UI built in vanilla HTML and CSS.",
-    tags: ["HTML", "CSS", "UI Design"],
-    image: "assets/images/northline-project.png",
-    imageAlt: "NorthLine Club repository preview image",
-    href: "https://github.com/Ericr567/NorthLineProject",
-    hrefLabel: "View GitHub Repo"
-  },
-  {
-    title: "BOH Dashboard",
+    title: "NorthLine Club Landing Page",
     summary:
-      "TypeScript-based dashboard project focused on back-of-house workflow visibility, with a clean interface for operational tracking and day-to-day management.",
-    tags: ["TypeScript", "Dashboard", "UI Design"],
-    image: "assets/images/boh-dashboard-project.jpg",
-    imageAlt: "BOH Dashboard app screenshot",
-    href: "https://github.com/Ericr567/Boh-dashboard",
-    hrefLabel: "View GitHub Repo"
+      "A responsive sign-up landing page concept designed to improve first impressions through strong hierarchy, clear calls to action, and polished form presentation.",
+    tags: ["HTML", "CSS", "Responsive Design"],
+    highlights: [
+      "Structured a single-page layout around conversion-focused messaging and CTA placement",
+      "Used modern CSS styling and spacing to create a cleaner onboarding experience",
+      "Built a lightweight mobile-friendly page that stays readable across screen sizes"
+    ],
+    image: "assets/images/generated/northline-club-link.png",
+    imageAlt: "NorthLine Club project preview screenshot",
+    href: "https://github.com/Ericr567/NorthLineProject",
+    hrefLabel: "View Code on GitHub"
+  },
+  {
+    title: "Northline E-Com",
+    summary:
+      "A live storefront concept focused on product presentation, browsing flow, and a clean front-end shopping experience.",
+    tags: ["HTML", "CSS", "JavaScript", "E-Commerce"],
+    highlights: [
+      "Built a product-focused layout with clear browsing sections and visual hierarchy",
+      "Designed responsive shopping views for desktop and mobile users",
+      "Demonstrated polished front-end styling and practical e-commerce UI patterns"
+    ],
+    image: "assets/images/generated/northline-ecom-live.png",
+    imageAlt: "Northline E-Com live storefront screenshot",
+    demoHref: "https://northlinee-market.netlify.app",
+    demoLabel: "Live Demo",
+    href: "https://github.com/Ericr567",
+    hrefLabel: "View GitHub Profile"
   }
 ];
 
@@ -43,63 +83,63 @@ const educationItems = [
     title: "HTML Certification",
     issuer: "Certificate File",
     detail: "Validated certification in HTML fundamentals and markup structure.",
-    href: "assets/certs/html-certificate.pdf",
+    href: "assets/certs/sql-certificate.pdf?v=20260418",
     hrefLabel: "View HTML Certificate"
   },
   {
     title: "CSS Certification",
     issuer: "Certificate File",
     detail: "Validated certification in CSS styling, layout systems, and responsive design.",
-    href: "assets/certs/css-certificate.pdf",
+    href: "assets/certs/swift-certificate.pdf?v=20260418",
     hrefLabel: "View CSS Certificate"
   },
   {
     title: "SQL Certification",
     issuer: "Certificate File",
     detail: "Validated certification in SQL querying, relational data concepts, and database operations.",
-    href: "assets/certs/sql-certificate.pdf",
+    href: "assets/certs/css-certificate.pdf?v=20260418",
     hrefLabel: "View SQL Certificate"
   },
   {
     title: "JavaScript Certification",
     issuer: "Certificate File",
     detail: "Validated certification in JavaScript syntax, interactivity, and application logic.",
-    href: "assets/certs/javascript-certificate.pdf",
+    href: "assets/certs/javascript-certificate.pdf?v=20260418",
     hrefLabel: "View JavaScript Certificate"
   },
   {
     title: "React Certification",
     issuer: "Certificate File",
     detail: "Validated certification in React components, state management, and modern UI development.",
-    href: "assets/certs/react-certificate.pdf",
+    href: "assets/certs/python-certificate.pdf?v=20260418",
     hrefLabel: "View React Certificate"
   },
   {
     title: "TypeScript Certification",
     issuer: "Certificate File",
     detail: "Validated certification in typed JavaScript development and scalable application patterns.",
-    href: "assets/certs/typescript-certificate.pdf",
+    href: "assets/certs/typescript-certificate.pdf?v=20260418",
     hrefLabel: "View TypeScript Certificate"
   },
   {
     title: "Python Certification",
     issuer: "Certificate File",
     detail: "Validated certification in Python programming, scripting, and problem solving.",
-    href: "assets/certs/python-certificate.pdf",
+    href: "assets/certs/html-certificate.pdf?v=20260418",
     hrefLabel: "View Python Certificate"
   },
   {
     title: "Swift Certification",
     issuer: "Certificate File",
     detail: "Validated certification in Swift programming and native application development fundamentals.",
-    href: "assets/certs/swift-certificate.pdf",
+    href: "assets/certs/react-certificate.pdf?v=20260418",
     hrefLabel: "View Swift Certificate"
   },
   {
     title: "Front End Development Certification",
     issuer: "Certificate File",
     detail: "Validated certification in front-end development principles, responsive interfaces, and modern web UI implementation.",
-    href: "assets/certs/frontend-development-certificate.pdf",
+    href: "assets/certs/frontend-development-certificate.pdf?v=20260418",
     hrefLabel: "View Front End Development Certificate"
   }
 ];
@@ -117,9 +157,10 @@ const skills = [
   "Swift"
 ];
 
-const words = ["from real profile data.", "for meaningful work.", "with professional focus."];
+const words = ["with React and JavaScript.", "with accessible design.", "for teams that need polished UI."];
 
 const projectGrid = document.getElementById("project-grid");
+const projectDisplay = document.getElementById("project-display");
 const projectFilters = document.getElementById("project-filters");
 const educationGrid = document.getElementById("education-grid");
 const skillsCloud = document.getElementById("skills-cloud");
@@ -129,15 +170,57 @@ const statusText = document.getElementById("form-status");
 const heroCopy = document.getElementById("hero-copy");
 const aboutTitle = document.getElementById("about-title");
 const aboutCopy = document.getElementById("about-copy");
+const certificateModal = document.getElementById("certificate-modal");
+const certificateFrame = document.getElementById("certificate-frame");
+const certificateTitle = document.getElementById("certificate-title");
+const certificateClose = document.getElementById("certificate-close");
+const certificateOpenLink = document.getElementById("certificate-open-link");
+const certificateDownloadLink = document.getElementById("certificate-download-link");
 
 function hydrateProfileContent() {
-  heroCopy.textContent = `I am ${profile.name}. ${profile.headline}`;
+  heroCopy.textContent = `${profile.name} is a junior front-end developer building clean, responsive, and user-focused interfaces. ${profile.headline}`;
   aboutTitle.textContent = `About ${profile.name}`;
-  aboutCopy.innerHTML = `${profile.about} <a href="#education">View my education and certification section</a>.`;
+  aboutCopy.innerHTML = `${profile.about} <a href="#projects">See the project work that demonstrates this approach</a>.`;
 }
 
 function renderSkills() {
   skillsCloud.innerHTML = skills.map((skill) => `<span>${skill}</span>`).join("");
+}
+
+function renderProjectDisplay(project) {
+  if (!(projectDisplay instanceof HTMLDivElement)) {
+    return;
+  }
+
+  if (!project) {
+    projectDisplay.innerHTML = "<p>No project is available for this filter yet.</p>";
+    return;
+  }
+
+  projectDisplay.innerHTML = `
+    ${
+      project.image
+        ? `<div class="project-display__media"><img src="${project.image}" alt="${project.imageAlt || `${project.title} preview`}" loading="lazy" /></div>`
+        : ""
+    }
+    <div class="project-display__body">
+      ${project.featured ? `<span class="project-badge">Featured Project</span>` : ""}
+      <p class="eyebrow">Project Case Study</p>
+      <h3>${project.title}</h3>
+      <p>${project.summary}</p>
+      <p class="project-proof-label">What this project demonstrates</p>
+      <ul class="project-proof">
+        ${(project.highlights || []).map((item) => `<li>${item}</li>`).join("")}
+      </ul>
+      <ul class="tag-list">
+        ${project.tags.map((tag) => `<li>${tag}</li>`).join("")}
+      </ul>
+      <div class="hero-cta">
+        ${project.demoHref ? `<a class="button primary" href="${project.demoHref}" target="_blank" rel="noreferrer">${project.demoLabel || "Live Demo"}</a>` : ""}
+        ${project.href ? `<a class="button ghost" href="${project.href}" target="_blank" rel="noreferrer">${project.hrefLabel || "View Details"}</a>` : ""}
+      </div>
+    </div>
+  `;
 }
 
 function renderProjects(filter = "All") {
@@ -146,7 +229,8 @@ function renderProjects(filter = "All") {
   projectGrid.innerHTML = visible
     .map(
       (project) => `
-      <article class="project-card">
+      <article class="project-card ${project.featured ? "project-card--featured" : ""}">
+        ${project.featured ? `<span class="project-badge">Featured</span>` : ""}
         ${
           project.image
             ? `<img class="project-thumb" src="${project.image}" alt="${project.imageAlt || `${project.title} preview`}" loading="lazy" />`
@@ -154,13 +238,20 @@ function renderProjects(filter = "All") {
         }
         <h3>${project.title}</h3>
         <p>${project.summary}</p>
-        ${
-          project.href
-            ? `<a class="button ghost project-link" href="${project.href}" target="_blank" rel="noreferrer">${
-                project.hrefLabel || "View Details"
-              }</a>`
-            : ""
-        }
+        <ul class="project-proof compact">
+          ${(project.highlights || []).map((item) => `<li>${item}</li>`).join("")}
+        </ul>
+        <div class="project-actions">
+          <button class="button ghost project-link preview-trigger" type="button" data-project="${project.title}">Preview Project</button>
+          ${project.demoHref ? `<a class="button primary project-link" href="${project.demoHref}" target="_blank" rel="noreferrer">${project.demoLabel || "Live Demo"}</a>` : ""}
+          ${
+            project.href
+              ? `<a class="button ghost project-link" href="${project.href}" target="_blank" rel="noreferrer">${
+                  project.hrefLabel || "View Details"
+                }</a>`
+              : ""
+          }
+        </div>
         <ul class="tag-list">
           ${project.tags.map((tag) => `<li>${tag}</li>`).join("")}
         </ul>
@@ -168,6 +259,8 @@ function renderProjects(filter = "All") {
     `
     )
     .join("");
+
+  renderProjectDisplay(visible[0]);
 }
 
 function renderEducation() {
@@ -178,9 +271,14 @@ function renderEducation() {
         <h3>${item.title}</h3>
         <p class="education-meta">Issued via ${item.issuer}</p>
         <p>${item.detail}</p>
-          <a class="button ghost project-link" href="${item.href}" target="_blank" rel="noreferrer" download>${
-          item.hrefLabel || "View Credential"
-        }</a>
+        <div class="project-actions">
+          <button class="button ghost project-link certificate-trigger" type="button" data-certificate="${item.href}" data-title="${item.title}">
+            Preview Certificate
+          </button>
+          <a class="button ghost project-link" href="${item.href}" target="_blank" rel="noreferrer">
+            Open PDF
+          </a>
+        </div>
       </article>
     `
     )
@@ -321,29 +419,170 @@ function initSectionSpy() {
   sections.forEach((section) => observer.observe(section));
 }
 
+function initProjectDisplay() {
+  if (!(projectGrid instanceof HTMLDivElement)) {
+    return;
+  }
+
+  projectGrid.addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (!(target instanceof HTMLElement)) {
+      return;
+    }
+
+    const trigger = target.closest(".preview-trigger");
+
+    if (!(trigger instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    const selectedProject = projects.find((project) => project.title === trigger.dataset.project);
+    renderProjectDisplay(selectedProject);
+    projectDisplay?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  });
+}
+
 function initContactForm() {
   const form = document.getElementById("contact-form");
 
-  form.addEventListener("submit", (event) => {
+  if (!(form instanceof HTMLFormElement)) {
+    return;
+  }
+
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
+    if (!form.reportValidity()) {
+      return;
+    }
+
     const formData = new FormData(form);
     const name = String(formData.get("name") || "").trim();
     const email = String(formData.get("email") || "").trim();
     const message = String(formData.get("message") || "").trim();
+    const recipient = profile.email.trim();
 
-    if (!name || !email || !message) {
-      statusText.textContent = "Please complete all fields before sending.";
-      return;
+    const outreachMessage = `Hello Eric,\n\nMy name is ${name} and you can reach me at ${email}.\n\n${message}\n\nBest regards,\n${name}`;
+    const params = new URLSearchParams({
+      subject: `Portfolio inquiry from ${name}`,
+      body: outreachMessage
+    });
+
+    try {
+      window.location.href = `mailto:${recipient}?${params.toString()}`;
+      statusText.textContent = "Your email app has been opened with a draft message ready to send.";
+      statusText.dataset.state = "success";
+    } catch (error) {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(outreachMessage);
+      }
+      statusText.textContent = "Your message has been copied. Please paste it into your email app and send it manually.";
+      statusText.dataset.state = "error";
     }
 
-    window.open(profile.linkedin, "_blank", "noopener,noreferrer");
-    statusText.textContent = `LinkedIn opened. You can send this message there: ${message}`;
     form.reset();
   });
 }
 
 function initYear() {
   document.getElementById("year").textContent = new Date().getFullYear();
+}
+
+function initThemeToggle() {
+  const themeToggle = document.getElementById("theme-toggle");
+
+  if (!(themeToggle instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  const savedTheme = localStorage.getItem("portfolio-theme");
+  const preferredTheme = window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "night";
+  const initialTheme = savedTheme || preferredTheme;
+
+  const applyTheme = (theme) => {
+    document.documentElement.dataset.theme = theme;
+    const isLight = theme === "light";
+    themeToggle.textContent = isLight ? "Night Mode" : "Light Mode";
+    themeToggle.setAttribute("aria-pressed", String(isLight));
+  };
+
+  applyTheme(initialTheme);
+
+  themeToggle.addEventListener("click", () => {
+    const nextTheme = document.documentElement.dataset.theme === "light" ? "night" : "light";
+    localStorage.setItem("portfolio-theme", nextTheme);
+    applyTheme(nextTheme);
+  });
+}
+
+function initCertificateViewer() {
+  if (
+    !(educationGrid instanceof HTMLDivElement) ||
+    !(certificateModal instanceof HTMLDivElement) ||
+    !(certificateFrame instanceof HTMLIFrameElement) ||
+    !(certificateTitle instanceof HTMLElement) ||
+    !(certificateClose instanceof HTMLButtonElement) ||
+    !(certificateOpenLink instanceof HTMLAnchorElement) ||
+    !(certificateDownloadLink instanceof HTMLAnchorElement)
+  ) {
+    return;
+  }
+
+  const openViewer = (title, href) => {
+    if (!href) {
+      return;
+    }
+
+    certificateTitle.textContent = title;
+    certificateFrame.src = "";
+    certificateOpenLink.href = href;
+    certificateDownloadLink.href = href;
+    certificateModal.hidden = false;
+    certificateModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+
+    requestAnimationFrame(() => {
+      certificateFrame.src = href;
+    });
+  };
+
+  const closeViewer = () => {
+    certificateModal.hidden = true;
+    certificateModal.setAttribute("aria-hidden", "true");
+    certificateFrame.src = "";
+    document.body.style.overflow = "";
+  };
+
+  educationGrid.addEventListener("click", (event) => {
+    const target = event.target;
+
+    if (!(target instanceof HTMLElement)) {
+      return;
+    }
+
+    const trigger = target.closest(".certificate-trigger");
+
+    if (!(trigger instanceof HTMLButtonElement)) {
+      return;
+    }
+
+    openViewer(trigger.dataset.title || "Certificate Preview", trigger.dataset.certificate || "");
+  });
+
+  certificateClose.addEventListener("click", closeViewer);
+
+  certificateModal.addEventListener("click", (event) => {
+    if (event.target === certificateModal) {
+      closeViewer();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !certificateModal.hidden) {
+      closeViewer();
+    }
+  });
 }
 
 function initNoise() {
@@ -390,6 +629,9 @@ cycleTyping();
 initCounters();
 initReveal();
 initSectionSpy();
+initProjectDisplay();
 initContactForm();
 initYear();
+initThemeToggle();
+initCertificateViewer();
 initNoise();
