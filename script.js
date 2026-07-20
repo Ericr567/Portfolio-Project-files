@@ -8,6 +8,21 @@ const profile = {
     "I bring a hospitality background shaped by consistency, communication, and service-first thinking into front-end development. My work centers on responsive interfaces, clean UI decisions, and practical user experience improvements built with modern web tools. I am actively looking for an opportunity where I can contribute to a team, keep learning fast, and ship polished front-end work that helps real users."
 };
 
+const nowFocus = [
+  {
+    title: "Sharpening React Fundamentals",
+    detail: "Building reusable components and improving state patterns to ship cleaner front-end architecture."
+  },
+  {
+    title: "Accessibility-First UI",
+    detail: "Applying keyboard, contrast, and semantic structure checks so interfaces are comfortable for all users."
+  },
+  {
+    title: "Production Readiness",
+    detail: "Practicing deployment workflows, bug triage, and polish passes that keep projects reliable after launch."
+  }
+];
+
 const projects = [
   {
     title: "LineFlow BOH Dashboard",
@@ -158,12 +173,56 @@ const skills = [
 ];
 
 const words = ["with React and JavaScript.", "with accessible design.", "for teams that need polished UI."];
+const useReactProjectsLayer = document.body?.dataset.reactLayer === "true";
+
+window.PORTFOLIO_DATA = {
+  profile,
+  nowFocus,
+  projects,
+  educationItems,
+  skills,
+  useReactProjectsLayer
+};
+
+const devModeParams = new URLSearchParams(window.location.search);
+const devModeParam = devModeParams.get("dev");
+const forceProdMode = devModeParam === "0" || devModeParam === "false";
+
+if (devModeParam === "1" || devModeParam === "true") {
+  localStorage.setItem("portfolio-dev-mode", "true");
+}
+
+if (devModeParam === "0" || devModeParam === "false") {
+  localStorage.removeItem("portfolio-dev-mode");
+}
+
+const runtimeFlags = {
+  isDevMode: (() => {
+    if (forceProdMode) {
+      return false;
+    }
+
+    const host = window.location.hostname;
+    const isLocalHost = host === "localhost" || host === "127.0.0.1" || host === "::1";
+    const isFilePreview = window.location.protocol === "file:";
+    const storedDevFlag = localStorage.getItem("portfolio-dev-mode") === "true";
+    return isLocalHost || isFilePreview || storedDevFlag;
+  })()
+};
+
+document.documentElement.dataset.devMode = String(runtimeFlags.isDevMode);
 
 const projectGrid = document.getElementById("project-grid");
 const projectDisplay = document.getElementById("project-display");
 const projectFilters = document.getElementById("project-filters");
+const projectSearch = document.getElementById("project-search");
+const siteHeader = document.querySelector(".site-header");
+const siteNav = document.getElementById("site-nav");
+const navToggle = document.getElementById("nav-toggle");
+const styleToggle = document.getElementById("style-toggle");
 const educationGrid = document.getElementById("education-grid");
 const skillsCloud = document.getElementById("skills-cloud");
+const nowGrid = document.getElementById("now-grid");
 const typingText = document.getElementById("typing-text");
 const counters = document.querySelectorAll(".counter");
 const statusText = document.getElementById("form-status");
@@ -176,15 +235,255 @@ const certificateTitle = document.getElementById("certificate-title");
 const certificateClose = document.getElementById("certificate-close");
 const certificateOpenLink = document.getElementById("certificate-open-link");
 const certificateDownloadLink = document.getElementById("certificate-download-link");
+const backToTopButton = document.getElementById("back-to-top");
+const atmosphere = document.querySelector(".atmosphere");
 
+const projectState = {
+  filter: "All",
+  query: ""
+};
+
+const projectsSearchIndex = projects.map((project) => ({
+  ...project,
+  searchText: `${project.title} ${project.summary} ${(project.tags || []).join(" ")} ${(project.highlights || []).join(" ")}`.toLowerCase()
+}));
+
+const stylePresetOrder = ["clean", "bold", "minimal"];
+
+const cssRefinementProfiles = {
+  night: {
+    clean: {
+      accent: "#6cb6ff",
+      accentAlt: "#4fd1c5",
+      accentCool: "#8af0df",
+      sunGlow: "rgba(108, 182, 255, 0.16)",
+      tideGlow: "rgba(79, 209, 197, 0.16)",
+      fxBase: 0.82,
+      blur: 11,
+      radius: 21
+    },
+    bold: {
+      accent: "#72beff",
+      accentAlt: "#5ce3d0",
+      accentCool: "#9bf5e8",
+      sunGlow: "rgba(114, 190, 255, 0.22)",
+      tideGlow: "rgba(92, 227, 208, 0.2)",
+      fxBase: 1,
+      blur: 12,
+      radius: 22
+    },
+    minimal: {
+      accent: "#7da8d8",
+      accentAlt: "#6eb8bf",
+      accentCool: "#97cfd4",
+      sunGlow: "rgba(125, 168, 216, 0.12)",
+      tideGlow: "rgba(110, 184, 191, 0.11)",
+      fxBase: 0.58,
+      blur: 8,
+      radius: 18
+    }
+  },
+  light: {
+    clean: {
+      accent: "#2f76d9",
+      accentAlt: "#1ea7a1",
+      accentCool: "#0f8f87",
+      sunGlow: "rgba(47, 118, 217, 0.12)",
+      tideGlow: "rgba(30, 167, 161, 0.11)",
+      fxBase: 0.74,
+      blur: 10,
+      radius: 20
+    },
+    bold: {
+      accent: "#2c7df0",
+      accentAlt: "#11b6a8",
+      accentCool: "#17a39d",
+      sunGlow: "rgba(44, 125, 240, 0.15)",
+      tideGlow: "rgba(17, 182, 168, 0.13)",
+      fxBase: 0.92,
+      blur: 11,
+      radius: 22
+    },
+    minimal: {
+      accent: "#4e729f",
+      accentAlt: "#4e8e8d",
+      accentCool: "#4f7f81",
+      sunGlow: "rgba(78, 114, 159, 0.08)",
+      tideGlow: "rgba(78, 142, 141, 0.08)",
+      fxBase: 0.5,
+      blur: 7,
+      radius: 17
+    }
+  }
+};
+
+function initCssRefinements() {
+  const root = document.documentElement;
+  const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const storedPreset = localStorage.getItem("portfolio-style-preset");
+  const state = {
+    stylePreset: runtimeFlags.isDevMode && stylePresetOrder.includes(storedPreset) ? storedPreset : "clean"
+  };
+
+  const getTheme = () => root.dataset.theme || (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "night");
+
+  const getProfile = (theme = getTheme()) => {
+    const themeProfiles = cssRefinementProfiles[theme] || cssRefinementProfiles.night;
+    return themeProfiles[state.stylePreset] || themeProfiles.clean;
+  };
+
+  const applyLayoutRefinements = () => {
+    const profile = getProfile();
+    const width = window.innerWidth;
+    const compact = width < 760;
+    const ultraWide = width > 1440;
+    const compactScale = compact ? 0.85 : 1;
+    const motionScale = reducedMotionQuery.matches ? 0.68 : 1;
+    const fxStrength = Math.max(0.35, profile.fxBase * compactScale * motionScale);
+
+    root.style.setProperty("--section-gap", compact ? "2.8rem" : ultraWide ? "5.8rem" : "clamp(3.2rem, 6vw, 5.2rem)");
+    root.style.setProperty("--hero-min-height", compact ? "auto" : "70vh");
+    root.style.setProperty("--panel-radius", `${Math.max(16, Math.round(profile.radius - (compact ? 2 : 0)))}px`);
+    root.style.setProperty("--glass-blur", `${Math.max(6, Math.round(profile.blur - (compact ? 2 : 0)))}px`);
+    root.style.setProperty("--fx-strength", fxStrength.toFixed(2));
+  };
+
+  const applyThemeRefinements = (theme) => {
+    const profile = getProfile(theme);
+    root.style.setProperty("--accent", profile.accent);
+    root.style.setProperty("--accent-alt", profile.accentAlt);
+    root.style.setProperty("--accent-cool", profile.accentCool);
+    root.style.setProperty("--sun-glow", profile.sunGlow);
+    root.style.setProperty("--tide-glow", profile.tideGlow);
+  };
+
+  const applyStylePreset = (preset) => {
+    if (!runtimeFlags.isDevMode) {
+      state.stylePreset = "clean";
+      root.dataset.stylePreset = "clean";
+      if (styleToggle instanceof HTMLButtonElement) {
+        styleToggle.textContent = "Style: Clean";
+      }
+      applyThemeRefinements(getTheme());
+      applyLayoutRefinements();
+      return;
+    }
+
+    if (stylePresetOrder.includes(preset)) {
+      state.stylePreset = preset;
+      localStorage.setItem("portfolio-style-preset", preset);
+    }
+
+    root.dataset.stylePreset = state.stylePreset;
+
+    if (styleToggle instanceof HTMLButtonElement) {
+      const label = `${state.stylePreset.charAt(0).toUpperCase()}${state.stylePreset.slice(1)}`;
+      styleToggle.textContent = `Style: ${label}`;
+    }
+
+    applyThemeRefinements(getTheme());
+    applyLayoutRefinements();
+  };
+
+  const cycleStylePreset = () => {
+    const currentIndex = stylePresetOrder.indexOf(state.stylePreset);
+    const nextPreset = stylePresetOrder[(currentIndex + 1) % stylePresetOrder.length];
+    applyStylePreset(nextPreset);
+  };
+
+  applyLayoutRefinements();
+  applyStylePreset(state.stylePreset);
+
+  window.addEventListener("resize", applyLayoutRefinements, { passive: true });
+  if (typeof reducedMotionQuery.addEventListener === "function") {
+    reducedMotionQuery.addEventListener("change", applyLayoutRefinements);
+  }
+
+  return {
+    isDevMode: runtimeFlags.isDevMode,
+    applyStylePreset,
+    applyLayoutRefinements,
+    applyThemeRefinements,
+    cycleStylePreset
+  };
+}
+
+const cssRefiner = initCssRefinements();
+
+function initStylePresetToggle() {
+  if (!(styleToggle instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  if (!cssRefiner.isDevMode) {
+    styleToggle.hidden = true;
+    return;
+  }
+
+  styleToggle.addEventListener("click", () => {
+    cssRefiner.cycleStylePreset();
+  });
+}
+
+function debounce(callback, delay = 140) {
+  let timerId;
+  return (...args) => {
+    window.clearTimeout(timerId);
+    timerId = window.setTimeout(() => callback(...args), delay);
+  };
+}
+
+/**
+ * Populate profile information from data into the DOM
+ * Sets hero copy, about title, and about section copy
+ */
 function hydrateProfileContent() {
   heroCopy.textContent = `${profile.name} is a junior front-end developer building clean, responsive, and user-focused interfaces. ${profile.headline}`;
   aboutTitle.textContent = `About ${profile.name}`;
   aboutCopy.innerHTML = `${profile.about} <a href="#projects">See the project work that demonstrates this approach</a>.`;
 }
 
+/**
+ * Render skills cloud as individual span elements
+ * Skipped if React layer is enabled (React renders instead)
+ */
 function renderSkills() {
   skillsCloud.innerHTML = skills.map((skill) => `<span>${skill}</span>`).join("");
+}
+
+/**
+ * Render "now" focus items as cards
+ * Skipped if React layer is enabled (React renders instead)
+ */
+function renderNow() {
+  if (!(nowGrid instanceof HTMLDivElement)) {
+    return;
+  }
+
+  nowGrid.innerHTML = nowFocus
+    .map(
+      (item) => `
+      <article class="now-card reveal">
+        <h3>${item.title}</h3>
+        <p>${item.detail}</p>
+      </article>
+    `
+    )
+    .join("");
+}
+
+function updateStats() {
+  const values = {
+    0: projects.filter((project) => project.featured).length || projects.length,
+    1: projects.filter((project) => Boolean(project.demoHref)).length,
+    2: educationItems.length
+  };
+
+  counters.forEach((counter, index) => {
+    if (typeof values[index] === "number") {
+      counter.dataset.target = String(values[index]);
+    }
+  });
 }
 
 function renderProjectDisplay(project) {
@@ -223,8 +522,13 @@ function renderProjectDisplay(project) {
   `;
 }
 
-function renderProjects(filter = "All") {
-  const visible = filter === "All" ? projects : projects.filter((project) => project.tags.includes(filter));
+function renderProjects(filter = "All", query = "") {
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredByTag = filter === "All" ? projectsSearchIndex : projectsSearchIndex.filter((project) => project.tags.includes(filter));
+
+  const visible = normalizedQuery
+    ? filteredByTag.filter((project) => project.searchText.includes(normalizedQuery))
+    : filteredByTag;
 
   projectGrid.innerHTML = visible
     .map(
@@ -286,6 +590,10 @@ function renderEducation() {
 }
 
 function initFilters() {
+  if (!(projectFilters instanceof HTMLDivElement)) {
+    return;
+  }
+
   const tags = ["All", ...new Set(projects.flatMap((project) => project.tags))];
 
   projectFilters.innerHTML = tags
@@ -307,7 +615,23 @@ function initFilters() {
     });
     target.classList.add("active");
     target.setAttribute("aria-pressed", "true");
-    renderProjects(target.dataset.filter);
+    projectState.filter = target.dataset.filter || "All";
+    renderProjects(projectState.filter, projectState.query);
+  });
+}
+
+function initProjectSearch() {
+  if (!(projectSearch instanceof HTMLInputElement)) {
+    return;
+  }
+
+  const applySearch = debounce((value) => {
+    projectState.query = value;
+    renderProjects(projectState.filter, projectState.query);
+  });
+
+  projectSearch.addEventListener("input", () => {
+    applySearch(projectSearch.value);
   });
 }
 
@@ -379,8 +703,15 @@ function initCounters() {
   counters.forEach((counter) => observer.observe(counter));
 }
 
+/**
+ * Initialize scroll reveal animations
+ * Uses Intersection Observer to fade in and slide up sections as they enter viewport
+ * Staggered animation delays for visual polish
+ */
 function initReveal() {
   const revealItems = document.querySelectorAll(".reveal");
+  revealItems.forEach((item, index) => item.style.setProperty("--reveal-delay", `${Math.min(index * 70, 420)}ms`));
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
@@ -396,6 +727,10 @@ function initReveal() {
   revealItems.forEach((item) => observer.observe(item));
 }
 
+/**
+ * Initialize section spy for navigation highlighting
+ * Updates active nav link as user scrolls through sections
+ */
 function initSectionSpy() {
   const sections = document.querySelectorAll("section[id]");
   const links = document.querySelectorAll(".site-nav a");
@@ -437,7 +772,7 @@ function initProjectDisplay() {
       return;
     }
 
-    const selectedProject = projects.find((project) => project.title === trigger.dataset.project);
+    const selectedProject = projectsSearchIndex.find((project) => project.title === trigger.dataset.project);
     renderProjectDisplay(selectedProject);
     projectDisplay?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   });
@@ -489,6 +824,11 @@ function initYear() {
   document.getElementById("year").textContent = new Date().getFullYear();
 }
 
+/**
+ * Initialize theme toggle button with localStorage persistence
+ * Respects user's system color scheme preference as fallback
+ * Updates CSS custom properties when theme changes
+ */
 function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
 
@@ -505,6 +845,8 @@ function initThemeToggle() {
     const isLight = theme === "light";
     themeToggle.textContent = isLight ? "Night Mode" : "Light Mode";
     themeToggle.setAttribute("aria-pressed", String(isLight));
+    cssRefiner.applyThemeRefinements(theme);
+    cssRefiner.applyLayoutRefinements();
   };
 
   applyTheme(initialTheme);
@@ -516,6 +858,10 @@ function initThemeToggle() {
   });
 }
 
+/**
+ * Initialize certificate preview modal
+ * Handles PDF preview loading and download functionality for credentials
+ */
 function initCertificateViewer() {
   if (
     !(educationGrid instanceof HTMLDivElement) ||
@@ -585,9 +931,23 @@ function initCertificateViewer() {
   });
 }
 
+/**
+ * Initialize noise canvas effect
+ * Creates animated film grain overlay with performance optimization
+ * Deferred to requestIdleCallback for better initial load performance
+ * Respects prefers-reduced-motion preference
+ */
 function initNoise() {
   const canvas = document.getElementById("noise-canvas");
+  if (!(canvas instanceof HTMLCanvasElement)) {
+    return;
+  }
+
   const context = canvas.getContext("2d", { alpha: true });
+  if (!context) {
+    return;
+  }
+
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   if (reducedMotion) {
@@ -602,7 +962,9 @@ function initNoise() {
     const image = context.createImageData(canvas.width, canvas.height);
     const data = image.data;
 
-    for (let i = 0; i < data.length; i += 4) {
+    // Draw noise with lower frequency sampling for better performance
+    const sampleRate = window.innerWidth < 768 ? 2 : 1;
+    for (let i = 0; i < data.length; i += 4 * sampleRate) {
       const shade = Math.floor(Math.random() * 255);
       data[i] = shade;
       data[i + 1] = shade;
@@ -615,23 +977,141 @@ function initNoise() {
 
   draw();
   window.addEventListener("resize", draw);
-  const redrawInterval = window.innerWidth < 768 ? 1300 : 900;
+  // Reduce redraw frequency: 2000ms on mobile, 1500ms on desktop
+  const redrawInterval = window.innerWidth < 768 ? 2000 : 1500;
   const noiseTimer = setInterval(draw, redrawInterval);
   window.addEventListener("beforeunload", () => clearInterval(noiseTimer), { once: true });
 }
 
+function initBackToTop() {
+  if (!(backToTopButton instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  const setVisible = () => {
+    backToTopButton.classList.toggle("visible", window.scrollY > 500);
+  };
+
+  setVisible();
+  window.addEventListener("scroll", setVisible, { passive: true });
+  backToTopButton.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+}
+
+function initMobileNav() {
+  if (!(siteHeader instanceof HTMLElement) || !(siteNav instanceof HTMLElement) || !(navToggle instanceof HTMLButtonElement)) {
+    return;
+  }
+
+  const closeMenu = () => {
+    siteHeader.classList.remove("menu-open");
+    navToggle.setAttribute("aria-expanded", "false");
+  };
+
+  navToggle.addEventListener("click", () => {
+    const isOpen = siteHeader.classList.toggle("menu-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  siteNav.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target instanceof HTMLAnchorElement) {
+      closeMenu();
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    const target = event.target;
+    if (!(target instanceof Node)) {
+      return;
+    }
+    if (!siteHeader.contains(target)) {
+      closeMenu();
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 700) {
+      closeMenu();
+    }
+  });
+}
+
+function initPageLoadAnimation() {
+  requestAnimationFrame(() => {
+    document.body.classList.add("page-ready");
+  });
+}
+
+function initVisualAtmosphere() {
+  if (!(atmosphere instanceof HTMLDivElement)) {
+    return;
+  }
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reducedMotion) {
+    return;
+  }
+
+  const setPointer = (x, y) => {
+    document.documentElement.style.setProperty("--pointer-x", `${x}px`);
+    document.documentElement.style.setProperty("--pointer-y", `${y}px`);
+  };
+
+  setPointer(window.innerWidth * 0.78, window.innerHeight * 0.16);
+
+  window.addEventListener(
+    "mousemove",
+    (event) => {
+      setPointer(event.clientX, event.clientY);
+    },
+    { passive: true }
+  );
+
+  window.addEventListener(
+    "touchmove",
+    (event) => {
+      const touch = event.touches[0];
+      if (!touch) {
+        return;
+      }
+      setPointer(touch.clientX, touch.clientY);
+    },
+    { passive: true }
+  );
+}
+
 hydrateProfileContent();
 renderSkills();
-renderProjects();
+renderNow();
+updateStats();
+if (!useReactProjectsLayer) {
+  renderProjects(projectState.filter, projectState.query);
+}
 renderEducation();
-initFilters();
+if (!useReactProjectsLayer) {
+  initFilters();
+  initProjectSearch();
+}
 cycleTyping();
 initCounters();
 initReveal();
 initSectionSpy();
-initProjectDisplay();
+if (!useReactProjectsLayer) {
+  initProjectDisplay();
+}
 initContactForm();
 initYear();
+initStylePresetToggle();
 initThemeToggle();
 initCertificateViewer();
-initNoise();
+initBackToTop();
+initMobileNav();
+initPageLoadAnimation();
+
+// Defer heavy effects until after initial render
+requestIdleCallback(() => {
+  initNoise();
+  initVisualAtmosphere();
+}, { timeout: 2000 });

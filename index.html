@@ -6,28 +6,77 @@
     <title>Eric Rogers | Front-End Developer Portfolio</title>
     <meta
       name="description"
-      content="Front-end developer portfolio for Eric Rogers featuring projects, certifications, and professional contact options."
+      content="Junior front-end developer portfolio. React, JavaScript, HTML, CSS, and accessibility expert. View featured projects, certifications, and case studies."
     />
-    <meta name="theme-color" content="#0a0e27" />
-    <meta property="og:title" content="Eric Rogers | Front-End Developer Portfolio" />
-    <meta property="og:description" content="Explore selected projects, verified certifications, and professional contact details for Eric Rogers." />
+    <meta name="author" content="Eric Rogers Jr." />
+    <meta name="keywords" content="front-end developer, React developer, JavaScript, accessible UI, responsive design, junior developer portfolio" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#0c2024" />
+    <meta property="og:title" content="Eric Rogers Jr. | Front-End Developer Portfolio" />
+    <meta property="og:description" content="Junior front-end developer specializing in React, JavaScript, accessible UI, and responsive design. View my featured projects and work." />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://eric-rogers-portfolio.dev" />
+    <meta property="og:image" content="assets/images/generated/boh-dashboard-live.png" />
+    <meta property="og:image:alt" content="Eric Rogers portfolio featuring React and JavaScript projects" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Eric Rogers Jr. | Front-End Developer" />
+    <meta name="twitter:description" content="React and JavaScript developer showcasing accessible, responsive UI work" />
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg" />
-    <link rel="stylesheet" href="styles.css?v=20260418-2" />
+    <link rel="canonical" href="https://eric-rogers-portfolio.dev" />
+    <link rel="preconnect" href="https://esm.sh" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="stylesheet" href="styles.css?v=20260719-9" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "about": {
+        "@type": "Person",
+        "name": "Eric Rogers Jr.",
+        "jobTitle": "Junior Front-End Developer",
+        "email": "ericrrj98@gmail.com",
+        "url": "https://eric-rogers-portfolio.dev",
+        "sameAs": [
+          "https://www.linkedin.com/in/eric-rogers-46298b2aa",
+          "https://github.com/Ericr567"
+        ],
+        "skills": ["React", "JavaScript", "TypeScript", "HTML", "CSS", "Accessibility", "Responsive Design", "UI/UX"],
+        "description": "Junior front-end developer focused on React, JavaScript, accessible UI, and responsive design. I bring a service-first mindset to clean, polished front-end work."
+      }
+    }
+    </script>
   </head>
-  <body>
+  <body data-react-layer="true">
     <a class="skip-link" href="#top">Skip to content</a>
     <canvas id="noise-canvas" aria-hidden="true"></canvas>
+    <div class="atmosphere" aria-hidden="true">
+      <span class="orb orb-sun"></span>
+      <span class="orb orb-wave"></span>
+      <span class="orb orb-aurora"></span>
+      <span class="scanline"></span>
+    </div>
 
     <header class="site-header">
       <a href="#top" class="logo" aria-label="Go to top">ER</a>
-      <nav class="site-nav" aria-label="Main">
+      <button
+        id="nav-toggle"
+        class="nav-toggle"
+        type="button"
+        aria-label="Toggle navigation menu"
+        aria-controls="site-nav"
+        aria-expanded="false"
+      >
+        Menu
+      </button>
+      <nav id="site-nav" class="site-nav" aria-label="Main">
         <a href="#about">About</a>
+        <a href="#now">Now</a>
         <a href="#projects">Projects</a>
         <a href="#education">Credentials</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
       </nav>
+      <button id="style-toggle" class="style-toggle" type="button" aria-label="Toggle visual style preset">Style: Clean</button>
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false">
         Light Mode
       </button>
@@ -65,6 +114,16 @@
         </ul>
       </section>
 
+      <section id="now" class="now section reveal">
+        <div class="section-header">
+          <div>
+            <p class="eyebrow">Now</p>
+            <h2>Where I am focusing right now</h2>
+          </div>
+        </div>
+        <div id="now-grid" class="now-grid" aria-live="polite"></div>
+      </section>
+
       <section id="about" class="about section reveal">
         <div>
           <p class="eyebrow">About Me</p>
@@ -84,7 +143,11 @@
             <p class="eyebrow">Featured Work</p>
             <h2>Projects That Show How I Work</h2>
           </div>
-          <div id="project-filters" class="filters" aria-label="Project filters"></div>
+          <div class="project-tools">
+            <label class="project-search-wrap" for="project-search">Search projects</label>
+            <input id="project-search" type="search" placeholder="Search by title, tag, or keyword" autocomplete="off" />
+            <div id="project-filters" class="filters" aria-label="Project filters"></div>
+          </div>
         </div>
         <div id="project-grid" class="project-grid" aria-live="polite"></div>
         <div id="project-display" class="project-display" aria-live="polite"></div>
@@ -160,6 +223,9 @@
       <p><span id="year"></span> Eric Rogers. Built with intention.</p>
     </footer>
 
-    <script src="script.js?v=20260418-2"></script>
+    <button id="back-to-top" class="back-to-top" type="button" aria-label="Back to top">Top</button>
+
+    <script src="script.js?v=20260719-8"></script>
+    <script type="module" async src="react-layer.js?v=20260719-3"></script>
   </body>
 </html>

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Allow: /assets/
+Disallow: /node_modules/
+
+Sitemap: https://eric-rogers-portfolio.dev/sitemap.xml
